@@ -97,7 +97,7 @@ The repository includes a GitHub Actions pipeline (.github/workflows/deploy.yml)
 
 ## File Structure
 
-tree
+```tree
 Team-15/
 ├── .github/
 │   └── workflows/            # GitHub Actions workflows
@@ -120,7 +120,7 @@ Team-15/
 ├── README.md                 # Project documentation
 ├── sonar-project.properties  # SonarQube property file
 ├── styles.css                # CSS styles
-
+```
 
 ## Contributing
 
