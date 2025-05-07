@@ -1,0 +1,53 @@
+name: Docker Image CD - Deploy
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+
+  Docker-Image-Build-Push:
+    runs-on: [ ubuntu-latest ]
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # Step 2: Determine the semantic version
+    - name: Determine Version
+      id: get_version
+      run: |
+        # Use release tag if available, else use branch name + short SHA
+        echo "Extracting version from commit message"
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        echo "Commit message: $COMMIT_MSG"
+        if [[ "$COMMIT_MSG" =~ v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+          VERSION="${BASH_REMATCH[0]}"
+        else
+          VERSION="${GITHUB_REF_NAME}-$(git rev-parse --short HEAD)"
+        fi
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+
+    # Step 3: Build the Docker image with semantic version
+    - name: Build Docker Image
+      env:
+        VERSION: ${{ env.VERSION }}
+      run: docker build . --file Dockerfile --tag sourish4c/team-15:${VERSION} --tag sourish4c/team-15:latest
+
+    # Step 4: Log in to Docker Hub
+    - name: Log in to Docker Hub
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+
+    # Step 5: Push the Docker image to Docker Hub with semantic version and latest tags
+    - name: Push Docker Image
+      env:
+        VERSION: ${{ env.VERSION }}
+      run: |
+        docker push sourish4c/team-15:${VERSION}
+        docker push sourish4c/team-15:latest
