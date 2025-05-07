@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: app-red
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: app
+      version: red
+  template:
+    metadata:
+      labels:
+        app: app
+        version: red
+    spec:
+      containers:
+        - name: app-red
+          image: sourish4c/team-15:vred
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.app.port }}
