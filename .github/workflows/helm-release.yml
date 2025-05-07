@@ -1,0 +1,80 @@
+name: Helm Packaging and Release
+
+on:
+  workflow_run:
+    workflows: [Docker Image CD - Deploy]
+    types:
+      - completed
+
+env:
+  CHART_DIR: helm-chart
+
+jobs:
+
+  Helm-Build-Package:
+    runs-on: [ ubuntu-latest ]
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # Step 2: Determine the semantic version
+    - name: Determine Version
+      id: get_version
+      run: |
+        # Use release tag if available, else use branch name + short SHA
+        echo "Extracting version from commit message"
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        echo "Commit message: $COMMIT_MSG"
+        if [[ "$COMMIT_MSG" =~ v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+          VERSION="${BASH_REMATCH[0]}"
+        else
+          VERSION="${GITHUB_REF_NAME}-$(git rev-parse --short HEAD)"
+        fi
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+
+    # Step 6: Set up Helm
+    - name: Set up Helm
+      uses: azure/setup-helm@v4.2.0
+      with:
+        version: v3.14.4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+        check-latest: true
+
+    # Step 7: Update values with build version
+    - name: Update Helm Values
+      env:
+        VERSION: ${{ env.VERSION }}
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+      run: |
+        sed -i "s|version: .*|version: ${VERSION:1}|g" ${CHART_DIR}/Chart.yaml
+        sed -i "s|appVersion: .*|appVersion: ${VERSION:1}|g" ${CHART_DIR}/Chart.yaml
+        sed -i "s|sourish4c/team-15:.*|sourish4c/team-15:${VERSION}|g" ${CHART_DIR}/values.yaml
+      # sed -i "s|ngrokAuth: .*|ngrokAuth: ${NGROK_TOKEN}|g" ${CHART_DIR}/values.yaml  
+
+    # Step 8: Helm Chart Testing
+    - name: Helm Lint and Dry-Run
+      continue-on-error: true
+      run: |
+        helm plugin install https://github.com/chartmuseum/helm-push || true
+        helm lint ${CHART_DIR}
+        helm template ${CHART_DIR}
+
+    # Step 9: Create Helm Package
+    - name: Create Helm Package
+      run: |
+        rm -rf charts/ || true
+        helm package ${CHART_DIR} -d charts/
+
+    # Step 10: Update Helm Repo Index
+    - name: Update Helm Repo Index
+      run: helm repo index charts/
+
+    # Step 11: Push Helm Package to Repo
+    - name: Push Helm Package to Repo
+      # Private helm repository URL
+      run: helm cm-push -f charts/team-15-app-*.tgz http://148.113.13.149:9999
