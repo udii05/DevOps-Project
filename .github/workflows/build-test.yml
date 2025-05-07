@@ -1,0 +1,84 @@
+name: Docker Image CI - Build & Test
+
+on:
+  push:
+    branches: [ "dev-test" ]
+
+jobs:
+  Code-Checkout-Analysis:
+    runs-on: [ ubuntu-latest ]
+    
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+    # Step 2: Determine the semantic version
+    - name: Determine Version
+      id: get_version
+      run: |
+        # Use release tag if available, else use branch name + short SHA
+        echo "Extracting version from commit message"
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        echo "Commit message: $COMMIT_MSG"
+        if [[ "$COMMIT_MSG" =~ v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+          VERSION="${BASH_REMATCH[0]}"
+        else
+          VERSION="${GITHUB_REF_NAME}-$(git rev-parse --short HEAD)"
+        fi
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+
+    # Step 3: Run SonarQube code scanner
+    - name: SonarQube code scanner
+      uses: sonarsource/sonarqube-scan-action@v3
+      continue-on-error: true
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+    # Step 4: Build the Docker image with semantic version
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag docker.io/sourish4c/team-15:${{ env.VERSION }}
+
+    # Step 5: Run Trivy image vulnerability scanner
+    - name: Run Trivy Inage Scan
+      continue-on-error: true
+      run: |
+        docker run --rm \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          aquasec/trivy \
+          --format table \
+          image sourish4c/team-15:${{ env.VERSION }}
+    
+    # Step 6: Deploy the Docker Image
+    - name: Deploy Docker Image to Test Container
+      run: |
+        docker stop team-15-webapp-test || true
+        docker rm team-15-webapp-test || true
+        docker run --rm -d --name team-15-webapp-test -p 8090:8080 sourish4c/team-15:${{ env.VERSION }}
+
+    # Step 7: Verify the Webpage is Accessible
+    - name: Check Webpage Accessibility
+      run: |
+        for i in {1..5}; do
+          if curl -s http://localhost:8090 | grep -q "<h1>Hackathon - Team 15</h1>"; then
+              echo ""
+              echo "SUCCESS! Webpage is accessible and contains the required header 'Hackathon - Team 15'!"
+              exit 0
+          else
+              echo "Waiting for the webpage with the required header to become accessible..."
+              sleep 5
+          fi
+        done
+        echo "ERROR! Webpage is not accessible after waiting!" >&2
+        exit 1
+
+    # Step 8: Clean up the Docker container and image
+    - name: Clean up
+      run: |
+        docker stop team-15-webapp-test || true
+        docker rm team-15-webapp-test || true
+        docker rmi docker.io/sourish4c/team-15:${{ env.VERSION }}
