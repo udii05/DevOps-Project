@@ -1,7 +1,4 @@
 # DevOps-Project
-[![Dev_Build_Test](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15/actions/workflows/build-test.yml/badge.svg)](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15//actions/workflows/build-test.yml)
-[![Dev_Build_Test](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15/actions/workflows/deploy.yml/badge.svg)](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15//actions/workflows/deploy.yml)
-[![Prod_Helm_Release](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15/actions/workflows/helm-release.yml/badge.svg)](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15//actions/workflows/helm-release.yml)
 
 [![sonarqube](https://img.shields.io/badge/SonarQube-Failed-red?style=for-the-badge&logo=sonarqube)](#)
 [![HTML](https://img.shields.io/badge/HTML5-orange?style=for-the-badge&logo=html5&logoColor=white)](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15/search?l=html)
