@@ -8,13 +8,13 @@
 [![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=kubernetes&logoColor=white)](#)
 ---
 
-# Team15 Hackathon Webpage
+# Project Webpage
 
-This repository contains the code for the *Hackathon Team 15* webpage. It showcases team members and their roles, using a clean, responsive design powered by HTML and CSS. The page is containerized using Docker and can be deployed on a virtual machine or Kubernetes.
+This repository contains the code to showcase the *DevOps workflow* webpage. It showcases team members and their roles, using a clean, responsive design powered by HTML and CSS. The page is containerized using Docker and can be deployed on a virtual machine or Kubernetes.
 
 ## Table of Contents
 
-- [Team15 Hackathon Webpage](#team15-hackathon-webpage)
+- [Project Webpage](#project-webpage)
   - [Table of Contents](#table-of-contents)
   - [Project Overview](#project-overview)
   - [Features](#features)
@@ -31,7 +31,7 @@ This repository contains the code for the *Hackathon Team 15* webpage. It showca
 
 ## Project Overview
 
-The *Team15 Hackathon Webpage* serves as a presentation page for the team's members and their roles. It is designed with responsiveness and compatibility in mind, ensuring it looks great across devices. The page can be easily deployed using Docker for seamless integration and deployment.
+The *Project Webpage* serves as a presentation page for the team's members and their roles. It is designed with responsiveness and compatibility in mind, ensuring it looks great across devices. The page can be easily deployed using Docker for seamless integration and deployment.
 
 ## Features
 
