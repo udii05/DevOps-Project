@@ -1,9 +1,5 @@
 replicaCount: 1
 
 app:
-  image: udii05/colorflux:latest
+  image: udii05/colorflux:v1
   port: 8080
-
-# ngrok:
-#   image: ngrok/ngrok:latest
-# ngrokAuth: SECRET
