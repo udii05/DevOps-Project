@@ -1,7 +1,7 @@
 replicaCount: 1
 
 app:
-  image: sourish4c/team-15:latest
+  image: udii05/colorflux:latest
   port: 8080
 
 # ngrok:
