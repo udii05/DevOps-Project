@@ -1,7 +1,5 @@
 replicaCount: 1
 
-namespace: team-15
-
 app:
   image: sourish4c/team-15:latest
   port: 8080
