@@ -118,14 +118,15 @@ header .tagline {
     transform: translateX(-50%);
 }
 
-/* ✨ Elegant divider line under avatar */
+/* Elegant divider line under avatar */
 .divider {
     width: 60%;
     height: 2px;
-    background: rgba(0,0,0,0.08);
+    background: rgba(0, 0, 0, 0.18);  /* darker + more visible */
     margin: 0.4rem auto 1.4rem auto;
     border-radius: 2px;
 }
+
 
 /* Text */
 .team-card h2 {
