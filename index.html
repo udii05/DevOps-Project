@@ -6,87 +6,61 @@
     <title>ColorFlux — DevOps Deployment Demo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <header>
-        <h1>ColorFlux — DevOps Deployment Demo</h1>
-        <p class="tagline">A simple, non-functional app built only to showcase DevOps skills</p>
+    <header class="hero">
+        <h1>ColorFlux</h1>
+        <p class="tagline">A sleek DevOps deployment showcase</p>
     </header>
 
-    <div class="container">
+    <section class="team-section">
+        <h2 class="section-title">Team Members</h2>
+
         <div class="team-grid">
 
-            <!-- Team Member 1 -->
+            <!-- Member 1 -->
             <div class="team-card">
-                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23718096'/><circle cx='200' cy='120' r='70' fill='%234A5568'/><circle cx='200' cy='280' r='110' fill='%234A5568'/><text x='200' y='150' font-family='Gill Sans' font-size='24' fill='white' text-anchor='middle'>Udita</text></svg>" 
-                     alt="Udita Chakraborty" class="card-image">
-                <div class="card-content">
-                    <h2>Udita Chakraborty</h2>
-                    <p class="role">B.Tech Student</p>
-                    <p class="email">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        udita.chakraborty05@gmail.com
-                    </p>
-                </div>
+                <img src="https://via.placeholder.com/400x300?text=Udita" class="avatar">
+                <h3>Udita Chakraborty</h3>
+                <p class="role">B.Tech Student</p>
+                <p class="email">udita.chakraborty05@gmail.com</p>
             </div>
 
-            <!-- Team Member 2 -->
+            <!-- Member 2 -->
             <div class="team-card">
-                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%232D3748'/><circle cx='200' cy='120' r='70' fill='%234A5568'/><circle cx='200' cy='280' r='110' fill='%234A5568'/><text x='200' y='150' font-family='Gill Sans' font-size='24' fill='white' text-anchor='middle'>Asmita</text></svg>" 
-                     alt="Asmita Chakraborty" class="card-image">
-                <div class="card-content">
-                    <h2>Asmita Chakraborty</h2>
-                    <p class="role">B.Tech Student</p>
-                    <p class="email">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        asmita.chakrab@gmail.com
-                    </p>
-                </div>
+                <img src="https://via.placeholder.com/400x300?text=Asmita" class="avatar">
+                <h3>Asmita Chakraborty</h3>
+                <p class="role">B.Tech Student</p>
+                <p class="email">asmita.chakrab@gmail.com</p>
             </div>
 
-            <!-- Team Member 3 -->
+            <!-- Member 3 -->
             <div class="team-card">
-                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%232D3748'/><circle cx='200' cy='120' r='70' fill='%234A5568'/><circle cx='200' cy='280' r='110' fill='%234A5568'/><text x='200' y='150' font-family='Gill Sans' font-size='24' fill='white' text-anchor='middle'>Manoj</text></svg>" 
-                     alt="Manoj Chakraborty" class="card-image">
-                <div class="card-content">
-                    <h2>Manoj Chakraborty</h2>
-                    <p class="role">Project Manager @Kyndryl</p>
-                    <p class="email">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        manoj_chakra@yahoo.com
-                    </p>
-                </div>
+                <img src="https://via.placeholder.com/400x300?text=Manoj" class="avatar">
+                <h3>Manoj Chakraborty</h3>
+                <p class="role">Project Manager @ Kyndryl</p>
+                <p class="email">manoj_chakra@yahoo.com</p>
             </div>
 
         </div>
-    </div>
+    </section>
 
     <footer>
         <p>&copy; 2025 ColorFlux. All rights reserved.</p>
-        <p style="font-size: 12px;">HTML — CSS — JS — Docker — Kubernetes | DevOps demo build</p>
+        <p class="tech-stack">HTML — CSS — JS — Docker — Kubernetes | DevOps demo</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.team-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
+        // Smooth Fade Animation
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".team-card");
+            cards.forEach((card, i) => {
                 setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 200);
+                    card.classList.add("fade-in");
+                }, i * 200);
             });
         });
     </script>
+
 </body>
 </html>
