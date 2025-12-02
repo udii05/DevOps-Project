@@ -1,14 +1,11 @@
-# Use the official python alpine image
-FROM python:alpine
+# Use official Nginx image
+FROM nginx:alpine
 
-# Set the working directory
-WORKDIR /html
+# Remove default nginx assets
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copy the required file into the container
-COPY . /html
+# Copy your project files into nginx html folder
+COPY . /usr/share/nginx/html/
 
-# Expose port 8080 to access the page
-EXPOSE 8080
-
-# Run the python server
-CMD ["python", "app.py"]
+# Expose port 80 (nginx default)
+EXPOSE 80
