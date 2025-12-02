@@ -12,8 +12,8 @@
     --header: #1B2B3C;          /* original header/footer */
     --footer: #1B2B3C;
     --accent: rgba(116,164,216,0.55); /* original soft blue glow */
-    --avatar-bg: #2c425a;       /* original avatar circle */
-    --avatar-icon: #3a5270;     /* original head/body */
+    --avatar-bg: #2c425a;       /* avatar circle */
+    --avatar-icon: #3a5270;     /* head/body color */
 }
 
 /* Background */
@@ -35,6 +35,7 @@ header {
 header h1 {
     color: #e8e8e8;
     font-size: 2.2rem;
+    letter-spacing: 0.5px;
     font-family: 'Gill Sans';
 }
 
@@ -43,7 +44,7 @@ header .tagline {
     opacity: 0.8;
 }
 
-/* Container */
+/* Center Container */
 .container {
     flex-grow: 1;
     display: flex;
@@ -51,30 +52,33 @@ header .tagline {
     align-items: center;
 }
 
-/* Only 2 cards now */
+/* Two Cards, Centered */
 .team-grid {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 3.2rem;
 }
 
-/* Bigger square cards */
+/* Bigger PERFECT SQUARE cards + softer rounded edge polish */
 .team-card {
     background: #ffffff;
-    padding: 2.2rem;
-    width: 340px;
-    height: 400px;
-    border-radius: 25px;
+    padding: 2.5rem 2.2rem;
+    width: 360px;
+    height: 360px;               /* perfect square */
+    border-radius: 28px;         /* polished rounded edges */
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.18);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-/* Original blue glow */
+/* Soft original glow */
 .team-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 0 22px var(--accent);
+    box-shadow: 0 0 25px var(--accent);
 }
 
 /* Avatar */
@@ -83,10 +87,12 @@ header .tagline {
     height: 120px;
     border-radius: 50%;
     background: var(--avatar-bg);
-    margin: 0 auto 1rem;
+    margin: 0 auto;
+    margin-bottom: 1.8rem; /* more spacing */
     position: relative;
 }
 
+/* Head */
 .blank-avatar::before {
     content: "";
     width: 50px;
@@ -99,32 +105,45 @@ header .tagline {
     transform: translateX(-50%);
 }
 
+/* Shoulders/Body */
 .blank-avatar::after {
     content: "";
     width: 75px;
     height: 40px;
     background: var(--avatar-icon);
-    border-radius: 40px 40px 0 0;
+    border-radius: 45px 45px 0 0;
     position: absolute;
     bottom: 22px;
     left: 50%;
     transform: translateX(-50%);
 }
 
+/* ✨ Elegant divider line under avatar */
+.divider {
+    width: 60%;
+    height: 2px;
+    background: rgba(0,0,0,0.08);
+    margin: 0.4rem auto 1.4rem auto;
+    border-radius: 2px;
+}
+
 /* Text */
 .team-card h2 {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     color: #333;
+    margin-top: 0.3rem;
 }
 
 .role {
     color: #6d8b5e;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.7rem;
 }
 
 .email {
     color: #555;
+    font-size: 0.92rem;
 }
 
 /* Footer */
