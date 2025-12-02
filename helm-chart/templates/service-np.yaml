@@ -1,7 +1,6 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: {{ .Values.namespace }}
   name: app-svc-np-blue
 spec:
   selector:
@@ -9,17 +8,16 @@ spec:
     version: blue
   type: NodePort
   ports:
-  - name: http
-    port: {{ .Values.app.port }}
-    protocol: TCP
-    targetPort: {{ .Values.app.port }}
+    - name: http
+      port: {{ .Values.app.port }}
+      protocol: TCP
+      targetPort: {{ .Values.app.port }}
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: {{ .Values.namespace }}
   name: app-svc-np-red
 spec:
   selector:
@@ -27,7 +25,7 @@ spec:
     version: red
   type: NodePort
   ports:
-  - name: http
-    port: {{ .Values.app.port }}
-    protocol: TCP
-    targetPort: {{ .Values.app.port }}
+    - name: http
+      port: {{ .Values.app.port }}
+      protocol: TCP
+      targetPort: {{ .Values.app.port }}
