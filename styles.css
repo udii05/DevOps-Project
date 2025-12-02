@@ -1,138 +1,159 @@
+/* Global Reset */
 * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        body {
-            background: linear-gradient(135deg, #242499, lightblue);
-            /* background: linear-gradient(135deg, #242499, green); */
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+/* Background & Body */
+body {
+    background: linear-gradient(135deg, #242499, lightblue);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
-        header {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1.5rem 0;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
+/* Hero Header */
+.hero {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2rem 0;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-        header h1 {
-            color: gainsboro;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-family: 'Gill Sans';
-        }
+.hero h1 {
+    color: gainsboro;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-family: 'Gill Sans';
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.tagline {
+    color: white;
+    margin-top: 0.6rem;
+    opacity: 0.8;
+    font-size: 1.2rem;
+}
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            width: 100%;
-            max-width: 1400px;
-        }
+/* Section Title */
+.section-title {
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
 
-        .team-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 100%;
-        }
+/* Team Section Wrapper */
+.team-section {
+    padding: 4rem 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
+/* Grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 1400px;
+}
 
-        .card-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
+/* Card */
+.team-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+    padding-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+}
 
-        .card-content {
-            padding: 1.5rem;
-        }
+.team-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        .card-content h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 0.2rem;
-        }
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
 
-        .card-content .role {
-            color: green;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            font-family: 'Gill Sans';
+/* Avatar */
+.avatar {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
 
-        }
+/* Card Text */
+.team-card h3 {
+    color: #333;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 1rem;
+    font-family: 'Gill Sans';
+}
 
-        .card-content .email {
-            color: #666;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+.role {
+    color: green;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
+}
 
-        .card-content .email svg {
-            width: 18px;
-            height: 18px;
-        }
+.email {
+    color: #555;
+    font-size: 0.95rem;
+    text-align: center;
+}
 
-        footer {
-            background: rgba(0, 0, 0, 0.2);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: auto;
-        }
+/* Footer */
+footer {
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
 
-        footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
 
-        @media (max-width: 1024px) {
-            .team-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                max-width: 900px;
-            }
-        }
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        max-width: 900px;
+    }
+}
 
-        @media (max-width: 768px) {
-            .team-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
 
-            header h1 {
-                font-size: 2rem;
-            }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
 
-            .container {
-                padding: 2rem 1rem;
-            }
-        }
+    .team-section {
+        padding: 2rem 1rem;
+    }
+}
