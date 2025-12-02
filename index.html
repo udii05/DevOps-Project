@@ -6,61 +6,44 @@
     <title>ColorFlux — DevOps Deployment Demo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header class="hero">
-        <h1>ColorFlux</h1>
-        <p class="tagline">A sleek DevOps deployment showcase</p>
-    </header>
 
-    <section class="team-section">
-        <h2 class="section-title">Team Members</h2>
+<header>
+    <h1>ColorFlux — DevOps Deployment Demo</h1>
+    <p class="tagline">A simple, non-functional app built only to showcase DevOps skills</p>
+</header>
 
-        <div class="team-grid">
+<div class="container">
+    <div class="team-grid">
 
-            <!-- Member 1 -->
-            <div class="team-card">
-                <img src="https://via.placeholder.com/400x300?text=Udita" class="avatar">
-                <h3>Udita Chakraborty</h3>
-                <p class="role">B.Tech Student</p>
-                <p class="email">udita.chakraborty05@gmail.com</p>
-            </div>
-
-            <!-- Member 2 -->
-            <div class="team-card">
-                <img src="https://via.placeholder.com/400x300?text=Asmita" class="avatar">
-                <h3>Asmita Chakraborty</h3>
-                <p class="role">B.Tech Student</p>
-                <p class="email">asmita.chakrab@gmail.com</p>
-            </div>
-
-            <!-- Member 3 -->
-            <div class="team-card">
-                <img src="https://via.placeholder.com/400x300?text=Manoj" class="avatar">
-                <h3>Manoj Chakraborty</h3>
-                <p class="role">Project Manager @ Kyndryl</p>
-                <p class="email">manoj_chakra@yahoo.com</p>
-            </div>
-
+        <div class="team-card">
+            <div class="blank-avatar"></div>
+            <h2>Udita Chakraborty</h2>
+            <p class="role">B.Tech Student</p>
+            <p class="email">udita.chakraborty05@gmail.com</p>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2025 ColorFlux. All rights reserved.</p>
-        <p class="tech-stack">HTML — CSS — JS — Docker — Kubernetes | DevOps demo</p>
-    </footer>
+        <div class="team-card">
+            <div class="blank-avatar"></div>
+            <h2>Asmita Chakraborty</h2>
+            <p class="role">B.Tech Student</p>
+            <p class="email">asmita.chakrab@gmail.com</p>
+        </div>
 
-    <script>
-        // Smooth Fade Animation
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".team-card");
-            cards.forEach((card, i) => {
-                setTimeout(() => {
-                    card.classList.add("fade-in");
-                }, i * 200);
-            });
-        });
-    </script>
+        <div class="team-card">
+            <div class="blank-avatar"></div>
+            <h2>Manoj Chakraborty</h2>
+            <p class="role">Project Manager @Kyndryl</p>
+            <p class="email">manoj_chakra@yahoo.com</p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 ColorFlux. All rights reserved.</p>
+    <p style="font-size: 12px;">HTML — CSS — JS — Docker — Kubernetes | DevOps demo build</p>
+</footer>
 
 </body>
 </html>
