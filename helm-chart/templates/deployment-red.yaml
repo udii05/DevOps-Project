@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app-red
-          image: sourish4c/team-15:vred
+          image: {{ .Values.app.image }}
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.app.port }}
