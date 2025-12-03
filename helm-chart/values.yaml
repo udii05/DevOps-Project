@@ -1,5 +1,13 @@
 replicaCount: 1
 
+# Common app settings
 app:
-  image: udii05/colorflux:v1
-  port: 8080
+  port: 80      # Nginx static server uses port 80
+
+# Blue deployment image
+appBlue:
+  image: "udii05/colorflux-blue:v1"
+
+# Red deployment image
+appRed:
+  image: "udii05/colorflux-red:v1"
