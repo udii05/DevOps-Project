@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app-red
-          image: {{ .Values.app.image }}
+          image: {{ .Values.appRed.image }}
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.app.port }}
