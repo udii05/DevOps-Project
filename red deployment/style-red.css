@@ -1,0 +1,150 @@
+/* Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Red Theme Palette */
+:root {
+    --bg: #3A1F24;              /* deep warm maroon background */
+    --header: #2E191D;          /* darker header/footer */
+    --footer: #2E191D;
+    --accent: rgba(255,120,120,0.55); /* soft glowing red */
+    --avatar-bg: #5C2B33;       /* avatar circle */
+    --avatar-icon: #7B3C47;     /* head/body */
+}
+
+/* Background */
+body {
+    background: var(--bg);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: var(--header);
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+header h1 {
+    color: #F2DCDC;
+    font-size: 2.2rem;
+    letter-spacing: 0.5px;
+    font-family: 'Gill Sans';
+}
+
+header .tagline {
+    color: #EAC7C7;
+    opacity: 0.8;
+}
+
+/* Center container */
+.container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card grid */
+.team-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3.2rem;
+}
+
+/* Perfect square cards */
+.team-card {
+    background: #ffffff;
+    padding: 2.5rem 2.2rem;
+    width: 360px;
+    height: 360px;
+    border-radius: 28px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Red glow */
+.team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px var(--accent);
+}
+
+/* Avatar circle */
+.blank-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--avatar-bg);
+    margin: 0 auto;
+    margin-bottom: 1.8rem;
+    position: relative;
+}
+
+.blank-avatar::before {
+    content: "";
+    width: 50px;
+    height: 50px;
+    background: var(--avatar-icon);
+    border-radius: 50%;
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.blank-avatar::after {
+    content: "";
+    width: 75px;
+    height: 40px;
+    background: var(--avatar-icon);
+    border-radius: 45px 45px 0 0;
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Divider */
+.divider {
+    width: 60%;
+    height: 2px;
+    background: rgba(0,0,0,0.25); 
+    margin: 0.4rem auto 1.4rem auto;
+    border-radius: 2px;
+}
+
+/* Text */
+.team-card h2 {
+    font-size: 1.35rem;
+    color: #333;
+    margin-top: 0.3rem;
+}
+
+.role {
+    color: #8C5E5E;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+}
+
+.email {
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background: var(--footer);
+    text-align: center;
+    padding: 1rem;
+    color: #F2DCDC;
+}
