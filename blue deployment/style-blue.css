@@ -6,14 +6,14 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Restored Color Palette */
+/* Color Palette */
 :root {
-    --bg: #22354A;              /* original background */
-    --header: #1B2B3C;          /* original header/footer */
+    --bg: #22354A;
+    --header: #1B2B3C;
     --footer: #1B2B3C;
-    --accent: rgba(116,164,216,0.55); /* original soft blue glow */
-    --avatar-bg: #2c425a;       /* avatar circle */
-    --avatar-icon: #3a5270;     /* head/body color */
+    --accent: rgba(116,164,216,0.55);
+    --avatar-bg: #2c425a;
+    --avatar-icon: #3a5270;
 }
 
 /* Background */
@@ -52,7 +52,7 @@ header .tagline {
     align-items: center;
 }
 
-/* Two Cards, Centered */
+/* Two Cards Centered */
 .team-grid {
     display: flex;
     justify-content: center;
@@ -60,7 +60,7 @@ header .tagline {
     gap: 3.2rem;
 }
 
-/* Bigger PERFECT SQUARE cards + softer rounded edge polish */
+/* Team Cards */
 .team-card {
     background: #ffffff;
     padding: 2.5rem 2.2rem;
@@ -75,7 +75,7 @@ header .tagline {
     justify-content: flex-start;
 }
 
-/* Soft original glow */
+/* Soft Glow */
 .team-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 0 25px var(--accent);
@@ -105,7 +105,7 @@ header .tagline {
     transform: translateX(-50%);
 }
 
-/* Shoulders/Body */
+/* Avatar Body */
 .blank-avatar::after {
     content: "";
     width: 75px;
@@ -118,7 +118,7 @@ header .tagline {
     transform: translateX(-50%);
 }
 
-/* Elegant divider line under avatar */
+/* Divider Line */
 .divider {
     width: 60%;
     height: 2px;
@@ -134,19 +134,16 @@ header .tagline {
     margin-top: 0.3rem;
 }
 
-/* UPDATED: match red version (soft blue tone instead of green) */
 .role {
-    color: #4A6D96;  
+    color: #4A6D96; 
     font-weight: 600;
-    margin-top: 0.4rem;
     margin-bottom: 0.7rem;
 }
 
-/* UPDATED: match red version email style */
 .email {
     color: #555;
-    font-size: 0.92rem;
-    margin-top: 0.2rem;
+    font-size: 1rem;
+    margin-top: 0;
 }
 
 /* Footer */
