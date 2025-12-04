@@ -8,12 +8,12 @@
 
 /* Red Theme Palette */
 :root {
-    --bg: #3A1F24;              /* deep warm maroon background */
-    --header: #2E191D;          /* darker header/footer */
+    --bg: #3A1F24;
+    --header: #2E191D;
     --footer: #2E191D;
-    --accent: rgba(255,120,120,0.55); /* soft glowing red */
-    --avatar-bg: #5C2B33;       /* avatar circle */
-    --avatar-icon: #7B3C47;     /* head/body */
+    --accent: rgba(255,120,120,0.55);
+    --avatar-bg: #5C2B33;
+    --avatar-icon: #7B3C47;
 }
 
 /* Background */
@@ -44,7 +44,7 @@ header .tagline {
     opacity: 0.8;
 }
 
-/* Center container */
+/* Center Container */
 .container {
     flex-grow: 1;
     display: flex;
@@ -52,7 +52,7 @@ header .tagline {
     align-items: center;
 }
 
-/* Card grid */
+/* Card Grid */
 .team-grid {
     display: flex;
     justify-content: center;
@@ -60,7 +60,7 @@ header .tagline {
     gap: 3.2rem;
 }
 
-/* Perfect square cards */
+/* Team Cards */
 .team-card {
     background: #ffffff;
     padding: 2.5rem 2.2rem;
