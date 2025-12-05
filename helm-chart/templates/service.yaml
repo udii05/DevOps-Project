@@ -8,7 +8,7 @@ spec:
     version: blue
   ports:
     - name: http
-      port: {{ .Values.app.port }}
+      port: {{ .Values.appBlue.port }}
       protocol: TCP
 
 ---
@@ -23,5 +23,5 @@ spec:
     version: red
   ports:
     - name: http
-      port: {{ .Values.app.port }}
+      port: {{ .Values.appRed.port }}
       protocol: TCP
