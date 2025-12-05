@@ -1,118 +1,156 @@
-# DevOps-Project
+# 🎨 ColorFlux – DevOps Deployment Demo Project
 
-[![sonarqube](https://img.shields.io/badge/SonarQube-Failed-red?style=for-the-badge&logo=sonarqube)](#)
 [![HTML](https://img.shields.io/badge/HTML5-orange?style=for-the-badge&logo=html5&logoColor=white)](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15/search?l=html)
 [![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15/search?l=css)
 [![DOCKER](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)](https://github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15/search?l=dockerfile)
 [![Python](https://img.shields.io/badge/Python-grey?style=for-the-badge&logo=python&logoColor=white)](#)
 [![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=kubernetes&logoColor=white)](#)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](#)
+
 ---
 
-## Table of Contents
+## 📌 Overview
 
-- [Project Webpage](#project-webpage)
-  - [Table of Contents](#table-of-contents)
-  - [Project Overview](#project-overview)
-  - [Features](#features)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-    - [Running Locally](#running-locally)
-  - [Remote Deployment](#remote-deployment)
-    - [Steps to Configure Deployment](#steps-to-configure-deployment)
-  - [File Structure](#file-structure)
-  - [Contributing](#contributing)
-    - [Guidelines](#guidelines)
-  - [License](#license)
+**ColorFlux** is a simple static web app designed to demonstrate a complete **DevOps workflow** using:
 
-## Project Overview
+- Docker  
+- Kubernetes  
+- Helm  
+- Minikube  
+- Blue–Red deployment model  
 
-The *Project Webpage* serves as a presentation page for the team's members and their roles. It is designed with responsiveness and compatibility in mind, ensuring it looks great across devices. The page can be easily deployed using Docker for seamless integration and deployment.
+The project contains **two environments**:
 
-## Features
+- 🔵 **Blue Version** — Blue-themed UI  
+- 🔴 **Red Version** — Red-themed UI  
 
-- Responsive design with a modern layout.
-- Team member profiles with images, roles, and contact information.
-- Containerised for easy deployment using Docker.
-- Automated deployment pipeline using GitHub Actions.
+Both versions run inside Kubernetes using Helm, and users can access both through NodePort services.
 
-## Getting Started
+---
 
-Follow the instructions below to set up and run the project locally.
+## ⭐ Features
+- Blue & Red version deployments  
+- Dockerized static frontend  
+- Kubernetes Deployments + Services  
+- Helm chart for easy version management  
+- Works fully on Minikube  
 
-### Prerequisites
+---
 
-Ensure you have the following installed on your system:
+# 🚀 Getting Started
 
-- [Docker](https://www.docker.com/)
-- [Git](https://git-scm.com/)
+## 1️⃣ Prerequisites
 
-### Installation
+Make sure the following are installed:
 
-1. Clone this repository:
+- **Docker Desktop**  
+- **Kubernetes (via Minikube)**  
+- **Helm**  
+- **Git**
 
-   bash
-   git clone https:/github.kyndryl.net/Platfrom-Engineering-at-Scale/Team-15.git
-   cd team15-hackathon
-   
+---
 
-2. Build the Docker image locally
+# 2️⃣ Clone the Repository
 
-   bash
-   docker build -t team-15-webapp .
-   
+```bash
+git clone https://github.com/udii05/DevOps-Project.git
+cd DevOps-Project
+```
 
-### Running Locally
+---
 
-Run the container to serve the webpage:
+# 3️⃣ Running Locally With Docker
+🔹 Blue Deployment (local)
+```bash
+cd "blue deployment"
+docker build -t colorflux-blue .
+docker run -p 8080:80 colorflux-blue
+```
+Open in browser:
 
-bash
-docker run -d --name team-15-webapp -p 8080:80 team-15-webapp
+👉 http://localhost:8080
 
+🔹 Red Deployment (local)
+```bash
+cd "red deployment"
+docker build -t colorflux-red .
+docker run -p 8081:80 colorflux-red
+```
+Open in browser:
 
-Access the webpage in your browser at http://localhost:8080.
+👉 http://localhost:8081
 
-## Remote Deployment
+---
 
-The repository includes a GitHub Actions pipeline (.github/workflows/deploy.yml) to automate deployment. The pipeline:
+# 4️⃣ Running Both Environments
+Step 1 - Start Minikube
+```bash
+minikube start
+```
 
-1. Copies the code to a target virtual machine (VM).
-2. Builds and runs the Docker container on the VM.
+Step 2 - Build and Push Docker images
+- 🔵 Blue Image
+```bash
+cd "blue deployment"
+docker build --no-cache -t colorflux-blue .
+docker tag colorflux-blue udii05/colorflux-blue:latest
+docker push udii05/colorflux-blue:latest
+```
+- 🔴 Red Image
+```bash
+cd "red deployment"
+docker build --no-cache -t colorflux-red .
+docker tag colorflux-red udii05/colorflux-red:latest
+docker push udii05/colorflux-red:latest
+```
 
-### Steps to Configure Deployment
+Step 3 — Deploy using Helm
+```bash
+helm upgrade --install colorflux ./helm-chart
+```
 
-1. Add the following GitHub Secrets to your repository:
-   - DOCKER_USERNAME: Dockerhub ID.
-   - DOCKER_PASSWORD: Dockerhub password.
-   - VM_SSH_KEY: Private SSH key for access.
+Step 4 — Force new pods to ensure latest images pull
+```bash
+kubectl delete pod -l version=blue
+kubectl delete pod -l version=red
+```
 
-2. Push your changes to a feature branch and create a Pull Request. Approve the Pull Request and merge your changes to the main branch to trigger the deployment workflow. The github actions workflow expects you to have an optional release tag.
+Step 5 — Access the Live Webpages
+- 🔵 BLUE UI:
+```bash
+minikube service app-svc-np-blue
+```
+- 🔴 RED UI:
+```bash
+minikube service app-svc-np-red
+```
+Both pages open automatically in your browser.
 
-## File Structure
+---
 
+## 📁 Project Structure
 ```tree
-Team-15/
-├── .github/
-│   └── workflows/            # GitHub Actions workflows
-│       └── build-test.yml    # Build & Test pipeline
-│       └── deploy.yml        # Deployment pipeline
-│       └── helm-release.yml  # Helm Deployment pipeline
-|── .githignore               # Git ignore file
-|── helm-chart/               # Helm directory   
-|   └── Charts.yaml           # Helm Charts file
-|   └── values.yaml           # Helm values file
-|   └── templates/            # Helm template directory
-│       └── deployment.yml
-│       └── secret.yml
-│       └── service.yml
-├── app.py                    # Python app file
-├── Dockerfile                # Docker configuration
-├── favicon.ico               # Favicon file
-├── index.html                # Main HTML file
-├── LICENSE.md                # License documentation
-├── README.md                 # Project documentation
-├── sonar-project.properties  # SonarQube property file
-├── styles.css                # CSS styles
+DevOps-Project-main/
+├── blue deployment/
+│   ├── Dockerfile
+│   ├── index-blue.html
+│   ├── style-blue.css
+│
+├── red deployment/
+│   ├── Dockerfile
+│   ├── index-red.html
+│   ├── style-red.css
+│
+├── helm-chart/
+│   ├── Chart.yaml
+│   ├── values.yaml
+│   └── templates/
+│       ├── deployment-blue.yaml
+│       ├── deployment-red.yaml
+│       ├── service.yaml
+│       ├── service-np.yaml
+│
+└── README.md
 ```
 
 ### **⭐ Support**
