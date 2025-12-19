@@ -160,3 +160,6 @@ If you liked this project, please star the repo — it really motivates me.
 
 Udita Chakraborty
 <p align="left"> <a href="https://github.com/udii05"> <img src="https://img.shields.io/badge/GitHub-udii05-black?style=flat-square&logo=github"> </a> <a href="https://www.linkedin.com/in/udita-chakraborty-b890982a2/"> <img src="https://img.shields.io/badge/LinkedIn-Udita%20Chakraborty-blue?style=flat-square&logo=linkedin"> </a> <a href="https://www.instagram.com/u_dii05"> <img src="https://img.shields.io/badge/Instagram-@u_dii05-e84393?style=flat-square&logo=instagram"> </a> </p>
+
+Asmita Chakraborty
+<p align="left"> <a href="https://github.com/asmitachakrab"> <img src="https://img.shields.io/badge/GitHub-asmitachakrab-black?style=flat-square&logo=github"> </a> <a href="https://www.linkedin.com/in/asmita-chakraborty-4b19132a1/"> <img src="https://img.shields.io/badge/LinkedIn-Asmita%20Chakraborty-blue?style=flat-square&logo=linkedin"> </a> <a href="https://www.instagram.com/__asmita.c"> <img src="https://img.shields.io/badge/Instagram-@__asmita.c-e84393?style=flat-square&logo=instagram"> </a> </p>
