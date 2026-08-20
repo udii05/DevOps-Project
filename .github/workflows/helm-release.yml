@@ -35,7 +35,7 @@ jobs:
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
         echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
-    # Step 6: Set up Helm
+    # Step 3: Set up Helm
     - name: Set up Helm
       uses: azure/setup-helm@v4.2.0
       with:
@@ -45,18 +45,17 @@ jobs:
         python-version: '3.x'
         check-latest: true
 
-    # Step 7: Update values with build version
+    # Step 4: Update values with build version
     - name: Update Helm Values
       env:
         VERSION: ${{ env.VERSION }}
-        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
       run: |
         sed -i "s|version: .*|version: ${VERSION:1}|g" ${CHART_DIR}/Chart.yaml
         sed -i "s|appVersion: .*|appVersion: ${VERSION:1}|g" ${CHART_DIR}/Chart.yaml
-        sed -i "s|sourish4c/team-15:.*|sourish4c/team-15:${VERSION}|g" ${CHART_DIR}/values.yaml
-      # sed -i "s|ngrokAuth: .*|ngrokAuth: ${NGROK_TOKEN}|g" ${CHART_DIR}/values.yaml  
+        sed -i "s|udii05/colorflux-blue:.*|udii05/colorflux-blue:${VERSION}\"|g" ${CHART_DIR}/values.yaml
+        sed -i "s|udii05/colorflux-red:.*|udii05/colorflux-red:${VERSION}\"|g" ${CHART_DIR}/values.yaml
 
-    # Step 8: Helm Chart Testing
+    # Step 5: Helm Chart Testing
     - name: Helm Lint and Dry-Run
       continue-on-error: true
       run: |
@@ -64,17 +63,17 @@ jobs:
         helm lint ${CHART_DIR}
         helm template ${CHART_DIR}
 
-    # Step 9: Create Helm Package
+    # Step 6: Create Helm Package
     - name: Create Helm Package
       run: |
         rm -rf charts/ || true
         helm package ${CHART_DIR} -d charts/
 
-    # Step 10: Update Helm Repo Index
+    # Step 7: Update Helm Repo Index
     - name: Update Helm Repo Index
       run: helm repo index charts/
 
-    # Step 11: Push Helm Package to Repo
+    # Step 8: Push Helm Package to Repo
     - name: Push Helm Package to Repo
       # Private helm repository URL
-      run: helm cm-push -f charts/team-15-app-*.tgz http://148.113.13.149:9999
+      run: helm cm-push -f charts/colorflux-*.tgz http://148.113.13.149:9999

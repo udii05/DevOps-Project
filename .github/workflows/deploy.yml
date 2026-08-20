@@ -31,11 +31,16 @@ jobs:
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
         echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
-    # Step 3: Build the Docker image with semantic version
-    - name: Build Docker Image
+    # Step 3: Build the Docker images with semantic version
+    - name: Build Blue Docker Image
       env:
         VERSION: ${{ env.VERSION }}
-      run: docker build . --file Dockerfile --tag sourish4c/team-15:${VERSION} --tag sourish4c/team-15:latest
+      run: docker build "blue deployment" --file "blue deployment/Dockerfile" --tag udii05/colorflux-blue:${VERSION} --tag udii05/colorflux-blue:latest
+
+    - name: Build Red Docker Image
+      env:
+        VERSION: ${{ env.VERSION }}
+      run: docker build "red deployment" --file "red deployment/Dockerfile" --tag udii05/colorflux-red:${VERSION} --tag udii05/colorflux-red:latest
 
     # Step 4: Log in to Docker Hub
     - name: Log in to Docker Hub
@@ -44,10 +49,12 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 
-    # Step 5: Push the Docker image to Docker Hub with semantic version and latest tags
-    - name: Push Docker Image
+    # Step 5: Push the Docker images to Docker Hub with semantic version and latest tags
+    - name: Push Docker Images
       env:
         VERSION: ${{ env.VERSION }}
       run: |
-        docker push sourish4c/team-15:${VERSION}
-        docker push sourish4c/team-15:latest
+        docker push udii05/colorflux-blue:${VERSION}
+        docker push udii05/colorflux-blue:latest
+        docker push udii05/colorflux-red:${VERSION}
+        docker push udii05/colorflux-red:latest

@@ -39,46 +39,60 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-    # Step 4: Build the Docker image with semantic version
-    - name: Build Docker Image
-      run: docker build . --file Dockerfile --tag docker.io/sourish4c/team-15:${{ env.VERSION }}
+    # Step 4: Build the Docker images with semantic version
+    - name: Build Blue Docker Image
+      run: docker build "blue deployment" --file "blue deployment/Dockerfile" --tag docker.io/udii05/colorflux-blue:${{ env.VERSION }}
+
+    - name: Build Red Docker Image
+      run: docker build "red deployment" --file "red deployment/Dockerfile" --tag docker.io/udii05/colorflux-red:${{ env.VERSION }}
 
     # Step 5: Run Trivy image vulnerability scanner
-    - name: Run Trivy Inage Scan
+    - name: Run Trivy Image Scan
       continue-on-error: true
       run: |
         docker run --rm \
           -v /var/run/docker.sock:/var/run/docker.sock \
           aquasec/trivy \
           --format table \
-          image sourish4c/team-15:${{ env.VERSION }}
+          image udii05/colorflux-blue:${{ env.VERSION }}
+        docker run --rm \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          aquasec/trivy \
+          --format table \
+          image udii05/colorflux-red:${{ env.VERSION }}
     
-    # Step 6: Deploy the Docker Image
-    - name: Deploy Docker Image to Test Container
+    # Step 6: Deploy the Docker images to test containers
+    - name: Deploy Docker Images to Test Containers
       run: |
-        docker stop team-15-webapp-test || true
-        docker rm team-15-webapp-test || true
-        docker run --rm -d --name team-15-webapp-test -p 8090:8080 sourish4c/team-15:${{ env.VERSION }}
+        docker stop colorflux-blue-test || true
+        docker rm colorflux-blue-test || true
+        docker run --rm -d --name colorflux-blue-test -p 8090:80 udii05/colorflux-blue:${{ env.VERSION }}
+        docker stop colorflux-red-test || true
+        docker rm colorflux-red-test || true
+        docker run --rm -d --name colorflux-red-test -p 8091:80 udii05/colorflux-red:${{ env.VERSION }}
 
-    # Step 7: Verify the Webpage is Accessible
+    # Step 7: Verify the webpages are accessible
     - name: Check Webpage Accessibility
       run: |
         for i in {1..5}; do
-          if curl -s http://localhost:8090 | grep -q "<h1>Hackathon - Team 15</h1>"; then
+          if curl -s http://localhost:8090 | grep -q "<h1>ColorFlux — DevOps Project</h1>" && curl -s http://localhost:8091 | grep -q "<h1>ColorFlux — DevOps Project</h1>"; then
               echo ""
-              echo "SUCCESS! Webpage is accessible and contains the required header 'Hackathon - Team 15'!"
+              echo "SUCCESS! Both webpages are accessible and contain the required header 'ColorFlux — DevOps Project'!"
               exit 0
           else
-              echo "Waiting for the webpage with the required header to become accessible..."
+              echo "Waiting for the webpages with the required header to become accessible..."
               sleep 5
           fi
         done
-        echo "ERROR! Webpage is not accessible after waiting!" >&2
+        echo "ERROR! Webpages are not accessible after waiting!" >&2
         exit 1
 
-    # Step 8: Clean up the Docker container and image
+    # Step 8: Clean up the Docker containers and images
     - name: Clean up
       run: |
-        docker stop team-15-webapp-test || true
-        docker rm team-15-webapp-test || true
-        docker rmi docker.io/sourish4c/team-15:${{ env.VERSION }}
+        docker stop colorflux-blue-test || true
+        docker rm colorflux-blue-test || true
+        docker stop colorflux-red-test || true
+        docker rm colorflux-red-test || true
+        docker rmi docker.io/udii05/colorflux-blue:${{ env.VERSION }} || true
+        docker rmi docker.io/udii05/colorflux-red:${{ env.VERSION }} || true
